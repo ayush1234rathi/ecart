@@ -7,7 +7,7 @@ function Product({title,category,price,thumbnail,id}){
     <div class="w-full aspect-square">
       <img className="w-full h-full object-cover" src={thumbnail} />
     </div>
-    <h6 className="text-gray-500 sm:text-xs text-xs mx-4">
+    <h6 className="text-base-taupe sm:text-xs text-xs mx-4">
       {category}
     </h6>
     <h1 className="text-xs sm:text-sm font-semibold mx-4">
