@@ -1,22 +1,24 @@
-// src/CartPage.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import CartList from './CartList';
+import CouponComponent from './CouponComponent.jsx';
 
 export function getProductsDetails(id) {
     return axios.get('https://dummyjson.com/products/' + id);
 }
 
-const CartPage = () => {
+function CartPage({ cartitem }){
     const [cartItems, setCartItems] = useState([]);
     const [total, setTotal] = useState(0);
 
     useEffect(() => {
-        // Assuming you have the cart item IDs stored in local storage or state
-        const cart = [
-            { id: 1, quantity: 2 },
-            { id: 2, quantity: 4 }
-        ];
+        const convertCartItemToArray = (cartitem) => {
+            return Object.entries(cartitem).map(([key, value]) => ({
+                id: parseInt(key, 10), // assuming keys are string representations of numbers
+                quantity: value
+            }));
+        };
+        const cart = convertCartItemToArray(cartitem);
 
         const fetchProducts = async () => {
             const products = await Promise.all(
@@ -40,13 +42,16 @@ const CartPage = () => {
     };
 
     return (
-        <div>
-            <h1>Your Cart</h1>
+        <div className="p-8 max-w-4xl mx-auto bg-white">
+            <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
             <CartList items={cartItems} />
-            <div className="cart-totals">
-                <p>Subtotal: ${total.toFixed(2)}</p>
-                <p>Total: ${total.toFixed(2)}</p>
-                <button>Proceed to Checkout</button>
+            <CouponComponent /> 
+            <div className="mt-6 p-4 border-t border-gray-200">
+                <p className="text-lg">Subtotal: ${total.toFixed(2)}</p>
+                <p className="text-lg">Total: ${total.toFixed(2)}</p>
+                <button className="mt-4 bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700">
+                    Proceed to Checkout
+                </button>
             </div>
         </div>
     );

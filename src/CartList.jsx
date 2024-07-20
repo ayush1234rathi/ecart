@@ -1,23 +1,30 @@
-// src/CartList.js
 import React from 'react';
 import CartRow from './CartRow';
 
-const CartList = ({ items }) => {
+function CartList({ items, handleAddToCart }){
+    function handleButtonClick(){
+        onAddToCart(id,count);
+      }
     return (
-        <div>
-            <table>
+        <div className="overflow-x-auto">
+            <table className="min-w-full border-2">
                 <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Subtotal</th>
+                    <tr className='border-y-2'>
+                        <th className="py-2 px-4 ">Product</th>
+                        <th className="py-2 px-4 ">Price</th>
+                        <th className="py-2 px-4 ">Quantity</th>
+                        <th className="py-2 px-4 ">Subtotal</th>
                     </tr>
                 </thead>
                 <tbody>
                     {items.map(item => (
                         <CartRow key={item.id} item={item} />
                     ))}
+                    {/* <tr>
+                        <td>
+                            <input />
+                        </td>
+                    </tr> */}
                 </tbody>
             </table>
         </div>

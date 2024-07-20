@@ -38,7 +38,7 @@ function App() {
             path="/P_Detail/:id/"
             element={<P_Detail onAddToCart={handleAddToCart} />}
              ></Route>
-             <Route path="/cart" element={CartPage} ></Route>
+             <Route path="/cart" element={<CartPage cartitem={cart} onAddToCart={handleAddToCart}/>} ></Route>
           <Route
              path="*"
             element={<Notfound/>}

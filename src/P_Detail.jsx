@@ -55,7 +55,7 @@ function P_Detail({onAddToCart}) {
            <h2 className="text-gray-700 text-md sm:text-lg font-bold">{ProductDetailsData.price}</h2>
            <p class="text-justify text-gray-500 text-sm sm:text-md ">{ProductDetailsData.description}</p>
            <div className="flex flex-wrap gap-1">
-             <input value={count} onChange={handleCountChange} type="number" min="1"  class="border-2 text-center w-16" />
+             <input value={count} onChange={handleCountChange} type="number" min="1"  className="border-2 text-center w-16" />
              <button onClick={handleButtonClick} className="hover:bg-base-drb bg-base-taupe text-white py-1 px-10 rounded-md">ADD TO CART</button>
            </div>
            <span className='grow'></span>
