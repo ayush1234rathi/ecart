@@ -5,6 +5,7 @@ import ProductListHome from './ProductListHome';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import P_Detail from './P_Detail';
 import Notfound from './Notfound';
+import CartPage from './CartPage';
 
 function App() {
   const savedDataString = localStorage.getItem('myCartItem')|| "{}";
@@ -37,6 +38,7 @@ function App() {
             path="/P_Detail/:id/"
             element={<P_Detail onAddToCart={handleAddToCart} />}
              ></Route>
+             <Route path="/cart" element={CartPage} ></Route>
           <Route
              path="*"
             element={<Notfound/>}
