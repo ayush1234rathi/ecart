@@ -40,6 +40,9 @@ function P_Detail({onAddToCart}) {
   function handleButtonClick(){
     onAddToCart(id,count);
   }
+  function handleLinkClick(){
+    setLoading(true);
+  }
    return(
      <>
          <div className="gap-4 sm:flex m-auto max-w-screen-md bg-white shadow-2xl p-5">
@@ -58,12 +61,12 @@ function P_Detail({onAddToCart}) {
            <span className='grow'></span>
            <div className="flex justify-between px-5"> 
        <div className=" hover:bg-base-taupe px-5 py-1 hover:text-white text-sm sm:text-base rounded-md">
-         {id>1 && <Link className="flex items-center" to= {"/P_Detail/"+ (id-1)}><GrLinkPrevious />Previous</Link>}
+         {id>1 && <Link className="flex items-center" onClick={handleLinkClick} to= {"/P_Detail/"+ (id-1)}><GrLinkPrevious />Previous</Link>}
 
      </div>
 
      <div className=" hover:bg-base-taupe px-5 py-1 hover:text-white text-sm sm:text-base rounded-md">
-       <Link className="flex items-center  " to= {"/P_Detail/"+(id+1)}>Next<GrLinkNext /></Link>
+       <Link className="flex items-center  " onClick={handleLinkClick} to= {"/P_Detail/"+(id+1)}>Next<GrLinkNext /></Link>
 
      </div>
      </div>
