@@ -18,11 +18,11 @@ function CouponComponent (){
     };
 
     return (
-        <div className='flex justify-between items-center mt-4'>
-            <div className="flex items-center space-x-4">
+        <div className='flex justify-between items-center mt-4 flex-wrap gap-3'>
+            <div className="flex items-center flex-wrap gap-3">
                 <input
                     type="text"
-                    className="border border-gray-300 p-2 rounded-md"
+                    className="border border-gray-300 p-2 rounded-md shrink sm:shrink-0"
                     placeholder="Coupon code"
                     value={coupon}
                     onChange={handleCouponChange}

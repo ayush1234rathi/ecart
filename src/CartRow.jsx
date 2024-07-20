@@ -9,7 +9,7 @@ function CartRow({ item }){
     
       }
     return (
-        <tr>
+        <tr className=''>
             <td className="py-2 px-4 border-b flex items-center text-center justify-normal"><CiCircleRemove /><img src={item.thumbnail} alt={item.title} className='h-16'/>{item.title}</td>
             <td className="py-2 px-4 border-b text-center">${item.price.toFixed(2)}</td>
             <td className="py-2 px-4 border-b text-center"><input value={count} type="number" className="border-2 text-center w-16" onChange={handleCountChange} /></td>

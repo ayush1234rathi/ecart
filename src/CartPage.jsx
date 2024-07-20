@@ -46,12 +46,31 @@ function CartPage({ cartitem }){
             <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
             <CartList items={cartItems} />
             <CouponComponent /> 
-            <div className="mt-6 p-4 border-t border-gray-200">
-                <p className="text-lg">Subtotal: ${total.toFixed(2)}</p>
-                <p className="text-lg">Total: ${total.toFixed(2)}</p>
-                <button className="mt-4 bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700">
-                    Proceed to Checkout
-                </button>
+            <div className='flex justify-end mt-6'>
+            <table className='sm:w-2/5 border-2 p-4 w-full'>
+                <thead className=' bg-gray-200'>
+                    <tr>
+                        <td colspan="2" className='text-lg py-2 px-4 border-b'>Cart details</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr >
+                        <td className='py-2 px-4 border-b'>Subtotal</td>
+                        <td className='py-2 px-4 border-b'>${total.toFixed(2)}</td>
+                    </tr>
+                    <tr >
+                        <td className='py-2 px-4 border-b'>Total</td>
+                        <td className='py-2 px-4 border-b'>${total.toFixed(2)}</td>
+                    </tr>
+                <tr>
+                    <td colspan="2">
+                        <button className="mt-4 bg-base-taupe w-full text-white py-2 px-4 rounded hover:bg-base-drb">
+                            Proceed to Checkout
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
             </div>
         </div>
     );
