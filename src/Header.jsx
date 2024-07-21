@@ -10,7 +10,7 @@ function Header({productCount}){
         <img className="h-16 w-36" src="https://i1.wp.com/bma-india.com/wp-content/uploads/2018/07/amazon-india-logo-1.jpg222-1.jpg?ssl=1" />
         </Link>
         <div className="relative">
-          <LiaShoppingBagSolid className="text-5xl text-base-taupe inline-block"/>
+        <Link to={"/cart"}><LiaShoppingBagSolid className="text-5xl text-base-taupe inline-block"/></Link>
           <span className="text-sm absolute top-0 right-0 rounded-full bg-base-taupe px-1 text-white ">{productCount}</span>
         </div>
         
