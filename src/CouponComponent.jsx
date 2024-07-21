@@ -35,7 +35,7 @@ function CouponComponent (){
                 </button>
             </div>
             <button
-                className="bg-base-taupe text-white py-2 px-4 rounded-md "
+                className="bg-base-taupe text-white py-2 px-4 rounded-md hover:bg-base-drb"
             >
                 UPDATE CART
             </button>

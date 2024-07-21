@@ -20,11 +20,6 @@ function CartList({ items, handleAddToCart }){
                     {items.map(item => (
                         <CartRow key={item.id} item={item} />
                     ))}
-                    {/* <tr>
-                        <td>
-                            <input />
-                        </td>
-                    </tr> */}
                 </tbody>
             </table>
         </div>
