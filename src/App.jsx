@@ -20,6 +20,15 @@ function App() {
     const cartString=JSON.stringify(newCart);
     localStorage.setItem('myCartItem',cartString);
   }
+  function handleUpdate(productId, count) {
+    const newCart = { ...cart, [productId]: count };
+    const filteredCart = Object.fromEntries(
+      Object.entries(newCart).filter(([key, value]) => value !== 0)
+    );
+    setCart(filteredCart);
+    const cartString = JSON.stringify(filteredCart);
+    localStorage.setItem('myCartItem', cartString);
+  }
 
   const totalCount = Object.keys(cart).reduce((previous, current) => {
     return previous + cart[current];
@@ -38,7 +47,7 @@ function App() {
             path="/P_Detail/:id/"
             element={<P_Detail onAddToCart={handleAddToCart} />}
              ></Route>
-             <Route path="/cart" element={<CartPage cartitem={cart} onAddToCart={handleAddToCart}/>} ></Route>
+             <Route path="/cart" element={<CartPage cartitem={cart} onAddToCart={handleUpdate}/>} ></Route>
           <Route
              path="*"
             element={<Notfound/>}
