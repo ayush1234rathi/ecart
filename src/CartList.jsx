@@ -1,14 +1,7 @@
 import React from 'react';
 import CartRow from './CartRow';
 
-function CartList({ items, handleAddToCart }){
-    function handleButtonClick(){
-        onAddToCart(id,count);
-      }
-    function handleUpdate(id, count) {
-        handleAddToCart(id, count);
-        console.log('Updating cart item:', id, 'with count:', count);
-    }
+function CartList({ items, localCart, updateCart, setLocalCart }){
     return (
         <div className="overflow-x-auto">
             <table className="min-w-full border-2 table-fixed">
@@ -23,13 +16,13 @@ function CartList({ items, handleAddToCart }){
                 </thead>
                 <tbody>
                     {items.map(item => (
-                        <CartRow key={item.id} item={item} handleUpdate={handleUpdate}/>
+                        <CartRow 
+                            key={item.id} // Add key prop
+                            item={item} 
+                            localCart={localCart} 
+                            updateCart={updateCart}  
+                            setLocalCart={setLocalCart} />
                     ))}
-                    {/* <tr>
-                        <td>
-                            <input />
-                        </td>
-                    </tr> */}
                 </tbody>
             </table>
         </div>
