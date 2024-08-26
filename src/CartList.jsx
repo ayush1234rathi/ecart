@@ -1,6 +1,7 @@
 import React from 'react';
 import CartRow from './CartRow';
 
+
 function CartList({ items, localCart, updateCart, setLocalCart }){
     return (
         <div className="overflow-x-auto">

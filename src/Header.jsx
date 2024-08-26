@@ -2,9 +2,19 @@ import React from 'react';
 import { LiaShoppingBagSolid } from "react-icons/lia";
 import {Link} from 'react-router-dom';
 import { IoMdPerson } from "react-icons/io";
+import { IoLogOut } from "react-icons/io5";
+import { userContext } from './providers/UserProvider';
+import { useContext } from 'react';
+import withCart from "./withCart";
 
-function Header({productCount}){
-
+function Header({ totalCount }){
+  const{user , setUser}= useContext(userContext);
+  console.log("user is ", user);
+  function handleLogout(){
+    localStorage.setItem("token", undefined);
+    setUser(null);
+  }
+  
   return (
     <div className ="flex bg-white items-start px-2 flex-wrap py-2">
       <div className="max-w-4xl w-full mx-auto flex items-center justify-between">
@@ -14,9 +24,11 @@ function Header({productCount}){
         <div className="flex">
           <div className="relative">
           <Link to={"/cart"}><LiaShoppingBagSolid className="text-5xl text-base-taupe inline-block"/></Link>
-            <span className="text-sm absolute top-0 right-0 rounded-full bg-base-taupe px-1 text-white ">{productCount}</span>
+            <span className="text-sm absolute top-0 right-0 rounded-full bg-base-taupe px-1 text-white ">{ totalCount }</span>
           </div>
-          <Link to={"/login"}><IoMdPerson className="text-5xl text-base-taupe inline-block"/></Link>
+          {/* <Link to={"/login"}><IoMdPerson className="text-5xl text-base-taupe inline-block"/></Link> */}
+        {!user && (<Link to={"/login"}><IoMdPerson className="text-5xl text-base-taupe inline-block"/></Link>)}
+        {user &&(<button onClick={handleLogout}><IoLogOut className="text-5xl text-base-taupe inline-block"/></button>)}
         </div>
 
     </div>
@@ -24,4 +36,4 @@ function Header({productCount}){
   );
 }
 
-export default Header;
+export default (withCart(Header));

@@ -5,46 +5,45 @@ import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
 import { getProductsDetails } from './Api';
 import Loading from './Loading';
 import Notfound from './Notfound';
+import withCart from './withCart';
 
-function P_Detail({ onAddToCart }) {
-  const params = useParams();
-  const id = +params.id;
-  const [ProductDetailsData, setProductDetailsData] = useState();
-  const [loading, setLoading] = useState(true);
-  const [count, setCount] = useState(1);
+function P_Detail({ handleAddToCart }) {
+      const params = useParams();
+      const id = +params.id;
+      console.log(id);
 
-  useEffect(() => {
-    const p = getProductsDetails(id);
-    p.then((response) => {
-      setProductDetailsData(response);
-      console.log(response.data);
-      setLoading(false);
-    }).catch(() => {
-      console.log("data is not found");
-      setLoading(false);
-    });
-    setCount(1);
-  }, [id]);
+      const [ProductDetailsData, setProductDetailsData] = useState();
+      const [loading, setLoading] = useState(true);
+      const [count, setCount] = useState(1);
 
-  const handleCountChange = useCallback((event) => {
-    setCount(+event.target.value);
-  }, []);
+      useEffect(() => {
+        const p = getProductsDetails(id);
+        p.then((response) => {
+          setProductDetailsData(response);
+          console.log(response.data);
+          setLoading(false);
+        }).catch(() => {
+          console.log("data is not found");
+          setLoading(false);
+        });
+        setCount(1);
+      }, [id]);
 
-  const handleButtonClick = useCallback(() => {
-    onAddToCart(id, count);
-  }, [onAddToCart, id, count]);
+      const handleCountChange = useCallback((event) => {
+        setCount(+event.target.value);
+      }, []);
 
-  const handleLinkClick = useCallback(() => {
-    setLoading(true);
-  }, []);
+      const handleButtonClick = useCallback(() => {
+        handleAddToCart(id, count);
+      }, [handleAddToCart, id, count]);
 
-  if (loading) {
-    return <Loading />;
-  } else if (!ProductDetailsData) {
-    return <Notfound />;
-  }
+      if (loading) {
+        return <Loading />;
+      } else if (!ProductDetailsData) {
+        return <Notfound />;
+      }
 
-  return (
+      return (
     <div className="gap-4 sm:flex m-auto max-w-screen-md bg-white shadow-2xl p-5">
       <Link className="text-4xl absolute hover:bg-base-taupe hover:rounded-full hover:text-white text-base-taupe p-2" to="/"><IoIosArrowRoundBack /></Link>
       <div className="mx-auto h-96 w-full items-center">
@@ -61,10 +60,10 @@ function P_Detail({ onAddToCart }) {
         <span className='grow'></span>
         <div className="flex justify-between px-5">
           <div className="hover:bg-base-taupe px-5 py-1 hover:text-white text-sm sm:text-base rounded-md">
-            {id > 1 && <Link className="flex items-center" onClick={handleLinkClick} to={"/P_Detail/" + (id - 1)}><GrLinkPrevious />Previous</Link>}
+            {id > 1 && <Link className="flex items-center" to={"/P_Detail/" + (id - 1)}><GrLinkPrevious />Previous</Link>}
           </div>
           <div className="hover:bg-base-taupe px-5 py-1 hover:text-white text-sm sm:text-base rounded-md">
-            <Link className="flex items-center" onClick={handleLinkClick} to={"/P_Detail/" + (id + 1)}>Next<GrLinkNext /></Link>
+            <Link className="flex items-center" to={"/P_Detail/" + (id + 1)}>Next<GrLinkNext /></Link>
           </div>
         </div>
       </div>
@@ -72,4 +71,4 @@ function P_Detail({ onAddToCart }) {
   );
 }
 
-export default P_Detail;
+export default (withCart(P_Detail));

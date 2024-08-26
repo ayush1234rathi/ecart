@@ -6,51 +6,53 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import {Link} from 'react-router-dom';
 import {getProductsDetails} from './Api';
 import Loading from './Loading';
+import withCart from './withCart';
 
-function CartPage({ cartitem, updateCart }){
-    const [cartItems, setCartItems] = useState([]);
-    const [total, setTotal] = useState(0);
-    const [loading, setLoading] = useState(true);
-    const [localCart, setLocalCart] = useState(cartitem);
+function CartPage({ cart, updateCart }) {
 
-    useEffect(() => {
-        const fetchProductDetails = async () => {
-            const myProductPromises = Object.keys(cartitem).map((itemId) =>
-                getProductsDetails(itemId)
-            );
-            const products = await Promise.all(myProductPromises);
-            setCartItems(products);
-            setLoading(false);
-        };
+        const [cartItems, setCartItems] = useState([]);
+        const [loading, setLoading] = useState(true);
+        const [localCart, setLocalCart] = useState(cart);
+        const [total, setTotal] = useState(0);
 
-        fetchProductDetails();
-    }, [cartitem]);
+        useEffect(() => {
+            const fetchProductDetails = async () => {
+                const myProductPromises = Object.keys(cart).map((itemId) =>
+                    getProductsDetails(itemId)
+                );
+                const products = await Promise.all(myProductPromises);
+                setCartItems(products);
+                setLoading(false);
+            };
 
-    useEffect(() => {
-        setLocalCart(cartitem);
-    }, [cartitem]);
+            fetchProductDetails();
+        }, [cart]);
 
-    useEffect(() => {
-        const calculateTotal = () => {
-            let newTotal = 0;
-            for (let i = 0; i < cartItems.length; i++) {
-                newTotal += cartItems[i].price * (localCart[cartItems[i].id] || 0);
-            }
-            setTotal(newTotal);
-        };
+        useEffect(() => {
+            setLocalCart(cart);
+        }, [cart]);
 
-        calculateTotal();
-    }, [cartItems, localCart]);
+        useEffect(() => {
+            const calculateTotal = () => {
+                let newTotal = 0;
+                for (let i = 0; i < cartItems.length; i++) {
+                    newTotal += cartItems[i].price * (localCart[cartItems[i].id] || 0);
+                }
+                setTotal(newTotal);
+            };
 
-    const handleUpdateCart = useCallback(() => {
-        updateCart(localCart);
-    }, [localCart, updateCart]);
+            calculateTotal();
+        }, [cartItems, localCart]);
 
-    if (loading) {
-        return <Loading />;
-    }
+        const handleUpdateCart = useCallback(() => {
+            updateCart(localCart);
+        }, [localCart, updateCart]);
 
-    return (
+        if (loading) {
+            return <Loading />;
+        }
+
+        return (
         <div className="p-8 max-w-4xl mx-auto bg-white relative">
             <Link className="text-4xl inline-block hover:bg-base-taupe hover:rounded-full hover:text-white text-base-taupe p-2" to="/"><IoIosArrowRoundBack /></Link>
             <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
@@ -109,4 +111,4 @@ function CartPage({ cartitem, updateCart }){
     );
 };
 
-export default CartPage;
+export default (withCart(CartPage));

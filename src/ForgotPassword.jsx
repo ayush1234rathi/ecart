@@ -1,22 +1,22 @@
-import React from 'react';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import React from "react";
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
 import { Link } from 'react-router-dom';
 import { IoMdPerson } from "react-icons/io";
 import { MdOutlineShoppingCartCheckout } from "react-icons/md";
 import FormikInput from './FormikInput';  // Import the custom component
 
 function ForgotPassword() {
-  const formik = useFormik({
-    initialValues: {
-      email: ''
-    },
-    validationSchema: Yup.object({
-      email: Yup.string().email('Invalid email address').required('Email is required')
-    }),
-    onSubmit: values => {
-      console.log("Reset Password Values:", values);
-    }
+  const onSubmit = (values) => {
+    console.log("Reset Password Values:", values);
+  };
+
+  const initialValues = {
+    email: "",
+  };
+
+  const validationSchema = Yup.object({
+    email: Yup.string().email("Invalid email address").required("Email is required"),
   });
 
   return (
@@ -24,11 +24,18 @@ function ForgotPassword() {
       <div className="text-base-taupe mb-3 text-9xl">
         <IoMdPerson />
       </div>
-      <form onSubmit={formik.handleSubmit} className="p-6 rounded-lg w-full max-w-md">
-        <FormikInput label="Enter your email" name="email" type="email" formik={formik} />
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={onSubmit}
+      >
+        {({ isSubmitting }) => (
+      <Form className="p-6 rounded-lg w-full max-w-md">
+        <FormikInput type="text" name="email" placeholder="EMAIL" label="EMAIL" id="email" />
         <button
           type="submit"
           className="w-full p-3 bg-base-taupe text-white rounded-lg hover:bg-base-drb"
+          disabled={isSubmitting}
         >
           Reset Password
         </button>
@@ -37,9 +44,11 @@ function ForgotPassword() {
             Back to Login
           </Link>
         </div>
-      </form>
+        </Form>
+          )}
+        </Formik>
     </div>
   );
-};
+}
 
 export default ForgotPassword;

@@ -1,22 +1,35 @@
-import React from 'react';
+import React from "react";
+import { useField } from "formik";
+function FormikInput({
+   name, label, id, placeholder}){
+    const field = useField(name);
+    console.log(field)
+    const [data , meta ]= field;
+    const{onChange , onBlur, value}=data;
+    const{error, touched}=meta;
+    let borderClass="  border-white";
+    if(error && touched){
+        borderClass="border-red-500"
+    }
 
-const FormikInput = ({ label, name, type = 'text', formik }) => {
-  return (
-    <div className="mb-4">
-      <label htmlFor={name} className="sr-only">{label}</label>
-      <input
-        id={name}
-        type={type}
-        name={name}
-        placeholder={label}
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values[name]}
-        className="w-full p-3 border border-base-taupe rounded-lg text-base-taupe placeholder-base-taupe "
-      />
-      {formik.touched[name] && formik.errors[name] && <div className='text-red-500'>{formik.errors[name]}</div>}
-    </div>
-  );
-};
+    return(
+
+        <div className="mb-4">
+            <label htmlFor={id} className="sr-only">
+                {label}
+            </label>
+        <input
+          id={id}
+          onChange={onChange}
+          onBlur={onBlur}
+          value={value}
+          name={name}
+          placeholder={placeholder}
+          className={"w-full p-3 border-2 border-base-taupe rounded-lg text-base-taupe placeholder-base-taupe" +" "+ borderClass}
+        />
+        { touched && error && <div className='text-red-500'>{error}</div> }
+      </div>
+    );
+}
 
 export default FormikInput;
