@@ -1,7 +1,7 @@
 import React from "react";
 import { useField } from "formik";
 function FormikInput({
-   name, label, id, placeholder}){
+   name, type, label, id, placeholder}){
     const field = useField(name);
     console.log(field)
     const [data , meta ]= field;
@@ -24,6 +24,7 @@ function FormikInput({
           onBlur={onBlur}
           value={value}
           name={name}
+          type={type}
           placeholder={placeholder}
           className={"w-full p-3 border-2 border-base-taupe rounded-lg text-base-taupe placeholder-base-taupe" +" "+ borderClass}
         />

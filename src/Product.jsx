@@ -14,11 +14,11 @@ function Product({title,category,price,thumbnail,id}){
       {title}
     </h1>
       <div className="w-4 flex mx-4">
-       <img src="./star.svg" alt="star"/>
+       {/* <img src="./star.svg" alt="star"/>
         <img src="./star.svg" alt="star"/>
         <img src="./star.svg" alt="star"/>
         <img src="./star.svg" alt="star"/>
-        <img src="./star.svg" alt="star"/>
+        <img src="./star.svg" alt="star"/> */}
       </div>
     <h4 className="text-xs sm:text-sm font-semibold mx-4 grow">
       ${price}
