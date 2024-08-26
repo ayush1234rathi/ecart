@@ -26,11 +26,10 @@ function FormikInput({
           name={name}
           type={type}
           placeholder={placeholder}
-          className={"w-full p-3 border-2 border-base-taupe rounded-lg text-base-taupe placeholder-base-taupe" +" "+ borderClass}
+          className={"w-full p-3 border-2 border-amber-900 rounded-lg text-base-taupe placeholder-base-taupe" +" "+ borderClass}
         />
         { touched && error && <div className='text-red-500'>{error}</div> }
       </div>
     );
 }
-
 export default FormikInput;
